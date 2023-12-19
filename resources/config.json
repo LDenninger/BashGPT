@@ -1,3 +1,16 @@
 {
-    "OPENAI_API_KEY": "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"
+    "OPENAI_API_KEY": "",
+    "MODEL_NAME": "gpt-3.5-turbo",
+    "MODE": "assistant",
+    "MAX_TOKENS": 500,
+    "TEMPERATURE": 0.0,
+    "TOP_P": 1.0,
+    "USE_PAST": false,
+    "SYSTEM_CALLS": {
+        "PYTHON": "You are a helpful assistant answering coding questions in python. Please exclude comments and any explanations in your response.",
+        "CPP": "You are a helpful assistant answering coding questions in C++. Please exclude comments within the code.",
+        "LATEX": "You are a helpful assistant answering questions about latex and giving correct latex formatted equations. Please exclude comments within the code.",
+        "ASSISTANT": "You are a helpful assistant."
+    }
+
 }
