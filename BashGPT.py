@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 
 from src.Printer import SimpleBash
 from src.ChatGPT import ChatGPT
@@ -9,6 +10,10 @@ from src.ChatGPT import ChatGPT
 if __name__ == '__main__':
     with open('resources/config.json', 'r') as f:
         config = json.load(f)
+    if len(config['OPENAI_API_KEY']) == 0:
+        if "OPENAI_API_KEY" not in os.environ:
+            raise Exception('OPENAI_API_KEY not set in config.json or in environment variable OPENAI_API_KEY')
+        config['OPENAI_API_KEY'] = os.environ['OPENAI_API_KEY']
 
     system_calls = {key.lower(): value for key, value in config['SYSTEM_CALLS'].items()}
 
