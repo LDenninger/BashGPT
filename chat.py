@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 
-from src.Printer import SimpleBash
+from src.BashGPT import BashGPT
 from src.ChatGPT import ChatGPT
 
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
                         args.max_tokens, args.top_p, config['OPENAI_API_KEY'])
     
 
-    printer = SimpleBash()
+    printer = BashGPT()
 
     while True:
         try:
