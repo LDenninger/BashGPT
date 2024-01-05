@@ -1,5 +1,8 @@
 import os
+import joblib
 from typing import Optional, Union, List, Tuple, Dict, Any
+
+from models.ModelInterface import ModelInterface
 
 ##-- Color Schemes --##
 RESET = "\033[0m"
@@ -21,17 +24,40 @@ class BashGPT:
     """
         A simple bash interface for a chat bot.
     """
-    def __init__(self, chat_model):
+    def __init__(self, 
+                 chat_model:ModelInterface, 
+                 chat_name:str='default',
+                 keep_in_ram:bool=False):
         self.chat_model = chat_model
-        self.past_messages = []
+        ##-- Parameters --##
+        self.chat_name = chat_name
+        self.keep_in_ram = keep_in_ram
+        ##-- Data structures --##
+        self.message_query = []
 
+        self.save()
         os.system('clear')
         return
     
-    def print(self, messages: list):
+    def __call__(self):
+        """
+            Request a chat input and give the response from the given chat model.
+
+        """
+        if not self.keep_in_ram:
+            self.load()
+        _ = self.request_input()
+        _ = self.request_response()
+        self.print()
+        if not self.keep_in_ram:
+            self.save()
+            self.clear()
+
+
+    def print(self):
         os.system('clear')
         # Print previous messages
-        for i, message in enumerate(messages):
+        for i, message in enumerate(self.past_messages):
             speaker = message['role']
             content = message['content']
             if speaker == 'user':
@@ -43,12 +69,56 @@ class BashGPT:
     def print_error(self, message: str):
         print_red(f'\n ERROR: {message}\n')
 
+    def request_response(self, message:str=None):
+        if message is not None:
+            self.message_query.append({
+                'role': 'user',
+                'content': message
+            })
+        
     def request_input(self):
         # Request user input
         user_input = input(">>> ")
+        new_message = {
+            'role': 'user',
+            'content': user_input
+        }
+        self.past_messages.append(new_message)
         print_red("\n Awaiting response...\n")
+
         return user_input
     
+    
+    ##-- Chat Management --##
+    def new_chat(self, chat_name: str='default'):
+        self.chat_name = chat_name
+
+    def chat_exists(self, chat_name:str=None):
+        if chat_name is None:
+            chat_name = self.chat_name
+        return os.path.exists(os.path.join('resources','chats',chat_name+'.joblib'))
+
+    def load(self, chat_name:str=None):
+        if chat_name is None:
+            chat_name = self.chat_name
+        try:
+            self.message_query = joblib.load(os.path.join('resources','chats',chat_name+'.joblib'))
+        except FileNotFoundError:
+            self.print_error(f'Chat not found: {chat_name}')
+    
+    def save(self, messages: List[Dict[str,str]]=None):
+        if messages is None:
+            messages = self.message_query
+        try:
+            joblib.dump(messages,os.path.join('resources','chats',self.chat_name+'.joblib'))
+        except:
+            self.print_error(f'Could not save chat: {self.chat_name}')
+
+    def clear(self):
+        self.message_query = []
+
+
+    ##-- Input Processing --##
     def check_command(self, input: str):
         """
             Check if a command was provided in the prompt and execute it.
@@ -111,4 +181,3 @@ class BashGPT:
             input = input[:ind] + text + input[ind:]
 
         return input
-
