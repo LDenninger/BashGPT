@@ -1,0 +1,18 @@
+{
+    "default": {
+        "system_call": "You are a helpful assistant. Give your full response in markdown format.",
+        "messages": []
+    },
+    "python_default": {
+        "system_call": "You are a helpful assistant answering coding questions in python. Exclude comments and any explanations in your response. Give your full response in markdown format.",
+        "messages": []
+    },
+    "cpp_default": {
+        "system_call": "You are a helpful assistant answering coding questions in C++. Exclude comments within the code. Give your full response in markdown format.",
+        "messages": []
+    },
+    "latex_default": {
+        "system_call": "You are a helpful assistant answering questions about latex and giving correct latex formatted equations. Exclude comments within the code. Give your full response in markdown format.",
+        "messages": []
+    }
+}
