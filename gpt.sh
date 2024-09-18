@@ -13,9 +13,8 @@ fi
 case "$COMMAND" in
     ask)
       QUESTION="$*"
+      #python3 src/gpt.py --ask --question "$QUESTION"
       python3 src/gpt.py --ask --question "$QUESTION" | pandoc -f markdown -t plain | cat
-      #pandoc -f markdown -t plain <(python3 src/gpt.py --ask --question "$QUESTION") | cat
-      #python3 src/gpt.py --ask --question "$QUESTION" > /tmp/output.md && pandoc /tmp/output.md -f markdown -t plain | cat && rm /tmp/output.md
 
       ;;
 

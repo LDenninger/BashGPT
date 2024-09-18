@@ -105,7 +105,7 @@ class Config(dict):
             except yaml.YAMLError as e:
                 print(f'Invalid YAML format in {config_path}:\n{e}')
         else:
-            print(f'Invalid file type in {config_path}!')
+            print(f'Invalid file type ({file_type}) in {config_path}!')
 
     def __str__(self):
         return json.dumps(self, indent=4)

@@ -3,6 +3,7 @@ import os
 import sys; sys.path.insert(0,os.path.dirname(__file__))
 import argparse
 import json
+from pathlib import Path
 
 from utils.config import Config
 from utils.chats import Chat, Profile, message_template
@@ -12,7 +13,7 @@ from termcolor import colored
 
 
 DEBUG_META_CONFIG_PATH = "resources/config"
-DEBUG = True
+DEBUG = False
 
 def arguments():
 
@@ -49,19 +50,22 @@ def main():
     if args.debug:
         print("Running BashGPT in debug mode...")
 
-    meta_config_path = "~/.config/bashgpt/config" if not args.debug else DEBUG_META_CONFIG_PATH
+    home_dir = Path(os.path.expanduser("~"))
+
+    meta_config_path = home_dir / ".config/bashgpt/config" if not args.debug else DEBUG_META_CONFIG_PATH
     try:
         with open(meta_config_path, 'r') as f:
             config_path = f.read()
     except FileNotFoundError:
         print(f"Config file not found at {meta_config_path}")
         exit(-1)
+    config_path = config_path.replace("\n", "").replace(" ", "")
+    config_path = home_dir / config_path
 
     config = Config(config_path, True)
     if args.debug:
         print(config)
 
- 
 
     if args.ask:
 
@@ -72,7 +76,7 @@ def main():
         config.set_private_key("openai_api_key", os.getenv('OPENAI_API_KEY'))
 
         try:
-            with open(config["profile_path"]) as f:
+            with open(home_dir / config["profile_path"]) as f:
                 profiles = json.load(f)
         except FileNotFoundError:
             print(colored(f"ERROR: Profile path not found {config['profile_path']}", "red"))
