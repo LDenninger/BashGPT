@@ -1,0 +1,3 @@
+bin/gpt.sh /usr/bin/bashgpt
+config /etc/bashgpt
+src /usr/share/bashgpt

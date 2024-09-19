@@ -1,0 +1,11 @@
+Source: bashgpt
+Section: utils
+Priority: optional
+Maintainer: Luis Denninger <luis0512@web.de>
+Build-Depends: debhelper (>= 9), dh-python, python3
+Standards-Version: 3.9.6
+
+Package: bashgpt
+Architecture: all
+Depends: python3
+Description: My awesome command-line tool
