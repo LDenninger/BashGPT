@@ -1,15 +1,39 @@
-# BashGPT
-This is a simple command line tool written in python utilizing the OpenAI API.
-It can be used to employ different pre-defined system calls for quick help through the command line.
-For further information about the API, please visit: https://openai.com/blog/openai-api
+<div align="center">
+<h2>BashGPT: ChatGPT for Command Line</h2>
+</div>
+
+A simple command line tool to run ChatGPT. Currently still work in progress.
+
+## Installation
+### Debian Package
+Currently I provide one pre-built debian package:
+```bash
+dpkg -i build bashgpt-0.0.1.deb
+```
+### From Source
+```bash
+source dev/env.sh
+build_tool [version number]
+dpkg -i builds/bashgpt-[version number].deb
+```
 
 ## Usage
-Through the `resources/config.json` file, you can specify default parameters for the model and system calls.
-The parameters can also be passed when calling BashGPT. <br/>
-Example usage:
+The tool can simply be called via command-line:
+### Question Answering
+```bash
+gpt ask [question]
 ```
-python BashGPT.py --model_name "gpt-3.5-turbo" --mode "assistant" --temperature 0.0 --max_tokens 500 --use_past False --top_p 1.0
+### Print Configuration
+To see the available configuration parameters and their current value:
+```bash
+gpt config
 ```
+### Set Configuration
+```bash
+gpt set [key] [value]
+```
+## License
+`BashGPT` is licensed under BSD-3
 
 ## Disclaimer
 This project is still work in progress and there is plan to add more functionalities

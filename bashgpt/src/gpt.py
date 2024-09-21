@@ -88,10 +88,10 @@ def main():
         base_prompt = profile.get_prompt()
         messages = base_prompt + [message_template('user', args.question)]
 
-        chat_gpt = ChatGPT( model_name = config["model_config"]['name'], 
-            temperature = config["model_config"]['temperature'], 
-            max_tokens = config["model_config"]['max_tokens'], 
-            top_p = config["model_config"]['top_p'],
+        chat_gpt = ChatGPT( model_name = config['model_name'], 
+            temperature = float(config['temperature']), 
+            max_tokens = int(config['max_tokens']), 
+            top_p = float(config['top_p']),
             api_key = config["openai_api_key"]
         )
 
@@ -106,6 +106,7 @@ def main():
             print(config)
 
         config.save()
+        print(f"Set {args.key} to {args.value}")
 
         
 

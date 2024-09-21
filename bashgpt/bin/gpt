@@ -42,12 +42,20 @@ case "$COMMAND" in
 
       ;;
 
+    config)
+      echo "BashGPT Config:"
+      cat /usr/share/bashgpt/config/config.json
+      ;;
+
     help)
-      echo "Usage: kal [command]"
+      echo "BashGPT Help"
+      echo "Usage: gpt [command] ..."
       echo "Commands:"
-      echo "  ask    - Ask a question"
-      echo "  set    - Set a value"
-      echo "  help   - Show this help message"
+      echo "  ask     - Ask a question (gpt ask [question])"
+      echo "  set     - Set a value (gpt set [key] [value])"
+      echo "  set_key - Set a OpenAI key (gpt set_key [key])"
+      echo "  config  - See configuration parameters"
+      echo "  help    - Show this help message"
       ;;
 
     *)

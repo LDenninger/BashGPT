@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "Welcome to BashGPT"
+echo "To proceed, please export your OpenAI API key as an environment variable (OPENAI_API_KEY):"
+read api_key
+
+if [ -d "~/.zshrc" ]; then
+    echo "Exporting API key to zshrc"
+    echo "\nexport OPENAI_API_KEY=$api_key" | ~/.zshrc"
+fi
+
+if [ -d "~/.bashrc" ]; then
+    echo "Exporting API key to bashrc"
+    echo "\nexport OPENAI_API_KEY=$api_key" | ~/.bashrc"
+fi
+
+pip3 install openai termcolor

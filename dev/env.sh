@@ -36,6 +36,7 @@ function build_tool(){
     cp -r bashgpt/config "$build_path/usr/share/bashgpt"
 
     chmod +x "$build_path/usr/bin/gpt"
+    chmod +x "$build_path/DEBIAN/postinst"
 
     dpkg-deb --build $build_path
 
