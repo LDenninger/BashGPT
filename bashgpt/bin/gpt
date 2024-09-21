@@ -14,7 +14,7 @@ case "$COMMAND" in
     ask)
       QUESTION="$*"
       #python3 src/gpt.py --ask --question "$QUESTION"
-      python3 /usr/share/gpt.py --ask --question "$QUESTION" | pandoc -f markdown -t plain | cat
+      python3 /usr/share/bashgpt/gpt.py --ask --question "$QUESTION" | pandoc -f markdown -t plain | cat
 
       ;;
 
@@ -27,7 +27,7 @@ case "$COMMAND" in
       KEY=$1
       VALUE=$2
 
-      python3 /usr/share/gpt.py --set --key $KEY --value $VALUE
+      python3 /usr/share/bashgpt/gpt.py --set --key $KEY --value $VALUE
       ;;
 
     set_key)

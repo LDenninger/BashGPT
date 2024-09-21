@@ -1,6 +1,6 @@
 {
     "profile": "default",
-    "profile_path": "resources/profiles",
+    "profile_path": "/usr/share/bashgpt/config/profiles",
     "model_config": {
         "name": "gpt-4o",
         "temperature": 0.0,

@@ -11,7 +11,7 @@ from models.ChatGPT import ChatGPT
 
 from termcolor import colored
 
-CONFIG_DIR = '/etc/bashgpt/'
+CONFIG_DIR = '/usr/share/bashgpt/config'
 DEBUG = False
 
 def arguments():
@@ -51,7 +51,7 @@ def main():
     if args.debug:
         print("Running BashGPT in debug mode...")
 
-    config = Config(str(config_dir/config.json), True)
+    config = Config(str(config_dir/ "config.json"), True)
     if args.debug:
         print(config)
 
