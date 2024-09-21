@@ -5,6 +5,8 @@ import argparse
 import json
 from pathlib import Path
 
+from commands.PromptParser import PromptParser
+from commands.basic_commands import ImportFileCommand
 from utils.config import Config
 from utils.chats import Chat, Profile, message_template
 from models.ChatGPT import ChatGPT
@@ -85,8 +87,14 @@ def main():
             print(colored(f"WARNING: Profile {config['profile']} not found, falling back to default!", "orange"))
             profile = profiles[0]
 
+        prompt_parser = PromptParser()
+        prompt_parser.add_command(ImportFileCommand())
+
+        question = args.question
+        question = prompt_parser(question)
+
         base_prompt = profile.get_prompt()
-        messages = base_prompt + [message_template('user', args.question)]
+        messages = base_prompt + [message_template('user', question)]
 
         chat_gpt = ChatGPT( model_name = config['model_name'], 
             temperature = float(config['temperature']), 
