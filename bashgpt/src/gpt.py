@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 from commands.PromptParser import PromptParser
-from commands.basic_commands import ImportFileCommand
+from commands.basic_commands import ImportFileCommand, ExecuteCommand
 from utils.config import Config
 from utils.chats import Chat, Profile, message_template
 from models.ChatGPT import ChatGPT
@@ -89,6 +89,8 @@ def main():
 
         prompt_parser = PromptParser()
         prompt_parser.add_command(ImportFileCommand())
+        prompt_parser.add_command(ExecuteCommand())
+        
 
         question = args.question
         question = prompt_parser(question)

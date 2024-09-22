@@ -13,8 +13,8 @@ fi
 case "$COMMAND" in
     ask)
       QUESTION="$*"
-      python3 /usr/share/bashgpt/gpt.py --ask --question "$QUESTION"
-      #python3 /usr/share/bashgpt/gpt.py --ask --question "$QUESTION" | pandoc -f markdown -t plain | cat
+      #python3 /usr/share/bashgpt/gpt.py --ask --question "$QUESTION"
+      python3 /usr/share/bashgpt/gpt.py --ask --question "$QUESTION" | pandoc -f markdown -t plain | cat
 
       ;;
 
