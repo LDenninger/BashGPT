@@ -23,6 +23,20 @@ The tool can simply be called via command-line:
 ```bash
 gpt ask [question]
 ```
+#### Import File Content
+Import the content of the file into the prompt.
+```bash
+gpt ask [question] \\file{[file name]}
+```
+
+#### Include command output
+Include the stdout and stderr of the command into the prompt.
+```bash
+gpt ask [question] \\execute{[command]}
+```
+
+
+
 ### Print Configuration
 To see the available configuration parameters and their current value:
 ```bash
@@ -32,6 +46,7 @@ gpt config
 ```bash
 gpt set [key] [value]
 ```
+###
 ## License
 `BashGPT` is licensed under BSD-3
 

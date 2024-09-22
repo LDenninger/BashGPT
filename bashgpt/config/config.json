@@ -3,7 +3,7 @@
     "profile_path": "/usr/share/bashgpt/config/profiles",
     "model_name": "gpt-4o",
     "temperature": 0.0,
-    "max_tokens": 500,
+    "max_tokens": 1500,
     "top_p": 1.0,
     "command_prefix": "!"
 }
