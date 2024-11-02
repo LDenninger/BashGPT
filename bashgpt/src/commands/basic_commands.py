@@ -16,7 +16,7 @@ class ImportFileCommand(Command):
         )
 
     def _execute(self, string: str, start:int, end:int) -> str:
-
+        
         cmd_args, arg_end = self._get_arguments(string, start, end)
         if len(cmd_args) == 0:
             print("Error: No file specified.")
@@ -25,7 +25,10 @@ class ImportFileCommand(Command):
             print("Error: Too many arguments.")
             return string
         
-        file_path = cmd_args[0]
+        file_path = Path(cmd_args[0])
+        if not file_path.is_absolute():
+            file_path = Path(os.getcwd()) / file_path
+        file_path = str(file_path)
 
         if not os.path.isfile(file_path):
             print(f"Error: File '{file_path}' does not exist.")

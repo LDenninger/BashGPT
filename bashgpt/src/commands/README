@@ -1,0 +1,18 @@
+# Commands
+
+Commands are given through a prefix `\\` followed by the command name like `\\file{}`.
+In the brackets one can provide arguments separate through `,`.
+
+## Examples
+
+Loading a file and inserting it into the request at the given position:
+
+```
+gpt ask Explain the functions in the following: \\file{/path/to/your/file}
+```
+
+Executing the command an parsing the stdout and stderr into the request.
+
+```
+gpt ask I get the following output from my program: \\execute{/path/to/your/file}. Can you tell me whats wrong?
+```

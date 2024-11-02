@@ -5,6 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
+from functions.BasicFunctions import OpenArxivArticle, WeatherFunction
 from commands.PromptParser import PromptParser
 from commands.basic_commands import ImportFileCommand, ExecuteCommand
 from utils.config import Config
@@ -98,15 +99,22 @@ def main():
         base_prompt = profile.get_prompt()
         messages = base_prompt + [message_template('user', question)]
 
+
         chat_gpt = ChatGPT( model_name = config['model_name'], 
             temperature = float(config['temperature']), 
             max_tokens = int(config['max_tokens']), 
             top_p = float(config['top_p']),
             api_key = config["openai_api_key"]
         )
+        arxiv_tool = OpenArxivArticle()
+
+        chat_gpt.add_tool(arxiv_tool)
 
         response = chat_gpt(messages)
-        print(response)
+        if response is not None:
+            print(response)
+
+            
 
     if args.set:
         config[args.key] = args.value
